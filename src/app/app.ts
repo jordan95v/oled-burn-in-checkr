@@ -1,4 +1,4 @@
-import { Component, signal, WritableSignal } from "@angular/core"
+import { Component, ElementRef, signal, ViewChild, WritableSignal } from "@angular/core"
 
 @Component({
     selector: "app-root",
@@ -18,6 +18,70 @@ export class App {
         "#ffff00", // Yellow
         "#00ffff", // Cyan
     ]
+    @ViewChild("cycleDiv") cycleDiv!: ElementRef<HTMLDivElement>
+
+    /**
+     * Lifecycle hook that is called after the view has been fully initialized.
+     * This method is used to set focus on the cycleDiv element to ensure it can receive keyboard events after hiding the interface.
+     *
+     * @remarks
+     * This is necessary to receive keyboard events after hiding the interface a second time.
+     */
+    ngAfterViewChecked(): void {
+        if (this.cycleDiv) {
+            this.cycleDiv.nativeElement.focus()
+        }
+    }
+
+    /**
+     * Parses an RGB color string and converts it to hexadecimal format.
+     *
+     * @param color - The RGB color string to parse (e.g., "rgb(255, 128, 0)" or "255, 128, 0")
+     * @returns The color in hexadecimal format (e.g., "#ff8000") or the original string if parsing fails
+     */
+    private parseRgb(color: string): string {
+        const rgbMatch: RegExpMatchArray | null = color.match(/\d+/g)
+        if (!rgbMatch) {
+            return color
+        }
+        const r: number = parseInt(rgbMatch[0])
+        const g: number = parseInt(rgbMatch[1])
+        const b: number = parseInt(rgbMatch[2])
+        return `#${[r, g, b]
+            .map((value) => value.toString(16).padStart(2, "0"))
+            .join("")}`
+    }
+
+    /**
+     * Cycles through background colors based on keyboard arrow key input.
+     *
+     * @param event - The keyboard event containing the pressed key
+     *
+     * @remarks
+     * - Right arrow key advances to the next color in the sequence
+     * - Left arrow key moves to the previous color in the sequence
+     * - Other keys are ignored and cause early return
+     * - Colors cycle infinitely in both directions
+     */
+    public cycleColors(event: KeyboardEvent): void {
+        let currentColor: string = document.documentElement.style.backgroundColor
+        if (currentColor.startsWith("rgb")) {
+            currentColor = this.parseRgb(currentColor)
+        }
+        let currentIndex: number = this.colors.indexOf(currentColor) || 0
+        switch (event.key) {
+            case "ArrowRight":
+                currentIndex = (currentIndex + 1) % this.colors.length
+                break
+            case "ArrowLeft":
+                currentIndex =
+                    (currentIndex - 1 + this.colors.length) % this.colors.length
+                break
+            default:
+                return
+        }
+        document.documentElement.style.backgroundColor = this.colors[currentIndex]
+    }
 
     /**
      * Changes the background color of the document's root element.

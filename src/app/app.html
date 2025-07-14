@@ -3,7 +3,7 @@
     <div class="card bg-base-300 shadow-xl mb-4">
         <div class="card-body">
             <h2 class="card-title mb-4">🖥️ OLED Burn-in Checkr</h2>
-            <p class="opacity-60">
+            <p class="text-sm opacity-60">
                 A simple web application to test OLED screens for burn-in issues.<br />
                 If you find this project useful, please consider leaving a star
                 <a href="https://github.com/jordan95v/oled-burn-in-checkr" target="_blank" class="link">here</a> ⭐
@@ -15,20 +15,24 @@
         <div class="card bg-base-300 shadow-xl">
             <div class="card-body">
                 <h2 class="card-title mb-4">❓ How to use ?</h2>
-                <p class="opacity-60 mb-4">This application is straightforward to use. Just follow these steps:</p>
-                <ul class="list-disc list-inside opacity-60 mb-4">
+                <p class="text-sm opacity-60 mb-4">This application is straightforward to use. Just follow these steps:</p>
+                <ul class="list-disc list-inside text-sm opacity-60 mb-4">
                     <li>Choose a color from the card on the right (or below on smaller screens).</li>
                     <li>Click the fullscreen button to test your screen.</li>
                     <li>Press <kbd class="kbd">Esc</kbd> to exit fullscreen mode.</li>
                 </ul>
-                <p class="opacity-60">You can also use the <kbd class="kbd">F11</kbd> key to toggle fullscreen mode in most browsers.</p>
+                <p class="text-sm opacity-60">
+                    You can also use the <kbd class="kbd">F11</kbd> key to toggle fullscreen mode in most browsers.
+                </p>
             </div>
         </div>
 
         <div class="card bg-base-300 shadow-xl">
             <div class="card-body">
                 <h2 class="card-title mb-4">🎨 Choose a color</h2>
-                <p class="opacity-60 mb-4">Click on a color below to select it. The selected color will be used for the burn-in test.</p>
+                <p class="text-sm opacity-60 mb-4">
+                    Click on a color below to select it. The selected color will be used for the burn-in test.
+                </p>
                 <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
                     @for (color of this.colors; track $index) {
                     <button class="btn w-full" [style.background-color]="color" (click)="this.changeBackgroundColor(color)"></button>
@@ -50,10 +54,18 @@
 
     <div class="card bg-base-300 shadow-xl mt-auto">
         <div class="card-body text-center">
-            <p class="opacity-60">Made with ❤️ by <a href="https://github.com/jordan95v" target="_blank" class="link">jordan95v</a></p>
+            <p class="text-sm opacity-60">
+                Made with ❤️ by <a href="https://github.com/jordan95v" target="_blank" class="link">jordan95v</a>
+            </p>
         </div>
     </div>
 </div>
 } @else {
-<button class="fixed inset-0 w-full h-full z-50 bg-transparent" (click)="this.toggleInterface()"></button>
+<div
+    class="fixed inset-0 w-full h-full bg-transparent"
+    (click)="this.toggleInterface()"
+    (keydown)="this.cycleColors($event)"
+    tabindex="0"
+    autofocus
+    #cycleDiv></div>
 }
