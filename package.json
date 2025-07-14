@@ -1,6 +1,6 @@
 {
-    "name": "oled-burn-in-tester",
-    "version": "0.0.0",
+    "name": "oled-burn-in-checkr",
+    "version": "0.1.0",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",

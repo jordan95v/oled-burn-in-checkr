@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "oled_burn_in_tester": {
+        "oled_burn_in_checkr": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -82,10 +82,10 @@
                     "builder": "@angular/build:dev-server",
                     "configurations": {
                         "production": {
-                            "buildTarget": "oled_burn_in_tester:build:production"
+                            "buildTarget": "oled_burn_in_checkr:build:production"
                         },
                         "development": {
-                            "buildTarget": "oled_burn_in_tester:build:development"
+                            "buildTarget": "oled_burn_in_checkr:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
