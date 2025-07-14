@@ -1,11 +1,12 @@
 @if (this.hide() !== true) {
-<div class="p-2 lg:p-8">
+<div class="flex flex-col h-full lg:h-screen p-4 lg:p-8">
     <div class="card bg-base-300 shadow-xl mb-4">
         <div class="card-body">
             <h2 class="card-title mb-4">🖥️ OLED Burn-in Checkr</h2>
             <p class="opacity-60">
                 A simple web application to test OLED screens for burn-in issues.<br />
-                If you find this project useful, please consider leaving a star <a href="" target="_blank" class="link">here</a> ⭐
+                If you find this project useful, please consider leaving a star
+                <a href="https://github.com/jordan95v/oled-burn-in-checkr" target="_blank" class="link">here</a> ⭐
             </p>
         </div>
     </div>
@@ -37,16 +38,22 @@
         </div>
     </div>
 
-    <div class="flex flex-col lg:flex-row mt-4 gap-4">
+    <div class="flex flex-col lg:flex-row my-4 gap-4">
         <button class="btn btn-primary w-full lg:w-50" (click)="this.resetTheme()">Reset theme</button>
         <div class="tooltip tooltip-bottom" data-tip="Click anywhere to show the interface after hiding it">
-            <button class="btn btn-primary w-full lg:w-50" (click)="this.toggle()">Hide interface</button>
+            <button class="btn btn-primary w-full lg:w-50" (click)="this.toggleInterface()">Hide interface</button>
         </div>
         <div class="tooltip tooltip-bottom" data-tip="Press Esc to exit fullscreen mode">
-            <button class="btn btn-primary w-full lg:w-50" (click)="this.fullscreen()">Go fullscreen</button>
+            <button class="btn btn-primary w-full lg:w-50" (click)="this.toggleFullscreen()">Toggle fullscreen</button>
+        </div>
+    </div>
+
+    <div class="card bg-base-300 shadow-xl mt-auto">
+        <div class="card-body text-center">
+            <p class="opacity-60">Made with ❤️ by <a href="https://github.com/jordan95v" target="_blank" class="link">jordan95v</a></p>
         </div>
     </div>
 </div>
 } @else {
-<button class="fixed inset-0 w-full h-full bg-transparent z-50" (click)="this.toggle()" aria-label="Show interface"></button>
+<button class="fixed inset-0 w-full h-full z-50 bg-transparent" (click)="this.toggleInterface()"></button>
 }

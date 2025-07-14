@@ -20,24 +20,12 @@ export class App {
     ]
 
     /**
-     * Toggles the current state of the `hide` property.
-     * If `hide` is currently `true`, it will be set to `false`, and vice versa.
-     */
-    public toggle(): void {
-        this.hide.set(!this.hide())
-    }
-
-    /**
-     * Enables fullscreen mode for the entire document.
-     * This method requests the browser to display the document
-     * in fullscreen mode by calling `requestFullscreen` on the
-     * root HTML element (`document.documentElement`).
+     * Changes the background color of the document's root element.
      *
-     * Note: Fullscreen functionality may require user interaction
-     * and can be subject to browser-specific restrictions.
+     * @param color - The desired background color as a string. This can be any valid CSS color value.
      */
-    public fullscreen(): void {
-        document.documentElement.requestFullscreen()
+    public changeBackgroundColor(color: string): void {
+        document.documentElement.style.backgroundColor = color
     }
 
     /**
@@ -48,11 +36,23 @@ export class App {
     }
 
     /**
-     * Changes the background color of the document's root element.
-     *
-     * @param color - The desired background color as a string. This can be any valid CSS color value.
+     * Toggles the current state of the `hide` property.
+     * If `hide` is currently `true`, it will be set to `false`, and vice versa.
      */
-    public changeBackgroundColor(color: string): void {
-        document.documentElement.style.backgroundColor = color
+    public toggleInterface(): void {
+        this.hide.set(!this.hide())
+    }
+
+    /**
+     * Toggles the fullscreen mode of the application.
+     * If the document is currently in fullscreen mode, it will exit fullscreen.
+     * If the document is not in fullscreen mode, it will request fullscreen on the document element.
+     */
+    public toggleFullscreen(): void {
+        if (document.fullscreenElement) {
+            document.exitFullscreen()
+        } else {
+            document.documentElement.requestFullscreen()
+        }
     }
 }
