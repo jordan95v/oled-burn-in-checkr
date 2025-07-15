@@ -2,3 +2,7 @@
 @plugin "daisyui" {
     themes: black --default;
 }
+
+* {
+    transition: background-color 0.8s ease;
+}
